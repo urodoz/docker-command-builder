@@ -1,0 +1,36 @@
+{
+  "name": "docker-command-builder",
+  "version": "0.0.1",
+  "description": "Docker command generator that take cares of container dependencies",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "mocha --recursive test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/urodoz/docker-command-builder.git"
+  },
+  "keywords": [
+    "docker",
+    "command",
+    "builder",
+    "container",
+    "generator",
+    "docker-io"
+  ],
+  "author": "Albert Lacarta <urodoz@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/urodoz/docker-command-builder/issues"
+  },
+  "homepage": "https://github.com/urodoz/docker-command-builder",
+  "devDependencies": {
+    "mocha": "^2.2.4",
+    "string": "^3.1.1"
+  },
+  "dependencies": {
+    "lodash": "^3.7.0",
+    "mustache": "^2.0.0",
+    "node-uuid": "^1.4.3"
+  }
+}
