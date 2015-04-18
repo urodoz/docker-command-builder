@@ -125,7 +125,11 @@ Add a runner instance as child container
 
 #### runner#setDaemon(boolean flag)
 
-Sets the run command as daemon or not (by default is ```true```)
+Sets the run command as daemon or not (by default is ```true```). If enabled, disables the cleanUp flag.
+
+#### runner#setCleanUp(boolean flag)
+
+Sets the container flag for clean up (--rm). If enabled, disables the daemon flag.
 
 #### runner#setImage(image)
 
@@ -149,13 +153,21 @@ Generates the command array
 
 ## Changelog
 
+#### **0.0.3**
+
+* Added support for clean up flag
+
+#### **0.0.2**
+
+* Travis integrated
+* Updated documentation
+
 #### **0.0.1**
 
 * First working version with basic support for build, pull and run
 
 ## TODO
 
-* Add clean up option to runner
 * Add runtime constraints to runner (memory and cpu)
 * Add privileged flag
 * Add user option to runner

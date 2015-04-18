@@ -16,6 +16,7 @@ module.exports = function(dockerVersion) {
     this.builder = null;
 
     this.daemon = true;
+    this.cleanUp = false;
     this.alias = null;
     this.ports = [];
     this._links = [];
@@ -28,6 +29,12 @@ module.exports = function(dockerVersion) {
         this.builder = new builder();
         this.builder.setTag(tag);
         this.builder.setDir(dir);
+        return this;
+    };
+
+    this.setCleanUp = function(flag) {
+        this.cleanUp = flag;
+        if(flag===true) this.daemon = false;
         return this;
     };
 
@@ -55,8 +62,9 @@ module.exports = function(dockerVersion) {
         return this;
     };
 
-    this.setDaemon = function(daemonBool) {
-        this.daemon = daemonBool;
+    this.setDaemon = function(flag) {
+        this.daemon = flag;
+        if(flag===true) this.cleanUp = false;
         return this;
     };
 
@@ -99,7 +107,8 @@ module.exports = function(dockerVersion) {
     };
 
     this.initTemplate = function() {
-        this.template = "docker run {{daemon}}"
+        this.template = "docker run {{#daemon}}{{daemon}}{{/daemon}}"
+            + "{{#cleanUp}}{{cleanUp}}{{/cleanUp}}"
             + " --name={{&name}}"
             + "{{#ports}}{{&ports}}{{/ports}}"
             + "{{#links}}{{&links}}{{/links}}"
@@ -147,6 +156,7 @@ module.exports = function(dockerVersion) {
         //Generating running command
         var templateObject = {
             daemon: (this.daemon) ? '-d' : '',
+            cleanUp: (this.cleanUp) ? '--rm' : '',
             image: this.image,
             name: this.name,
             links: (_.isEmpty(this._links)) ? false : this._links.join(" "),
