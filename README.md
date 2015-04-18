@@ -148,3 +148,12 @@ Generates the command array
 ####**0.0.1**
 
 * First working version with basic support for build, pull and run
+
+## TODO
+
+* Add clean up option to runner
+* Add runtime constraints to runner (memory and cpu)
+* Add privileged flag
+* Add user option to runner
+* Add workdir option to runner
+* Add command option to runner
