@@ -2,6 +2,10 @@
 
 Docker command generator that take cares of container dependencies
 
+#### Build status
+
+[![Build Status](https://travis-ci.org/urodoz/docker-command-builder.svg?branch=master)](https://travis-ci.org/urodoz/docker-command-builder)
+
 ## Installation
 
 Use NPM to install the library:
