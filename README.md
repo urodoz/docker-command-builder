@@ -10,48 +10,52 @@ Docker command generator that take cares of container dependencies
 
 Use NPM to install the library:
 
-    npm install docker-command-builder
+```bash
+npm install docker-command-builder
+```
     
 ## Usage
 
 You can use the runner component to create dependant containers:
 
-    dockerComm = require("docker-command-builder");
+```javascript
+dockerComm = require("docker-command-builder");
 
-    var runnerBuilderChild = dockerComm("runner");
-    runnerBuilderChild
-        .setName("selenium-named-chrome")
-        .setImage("selenium-node-chrome:2.45.0")
-        .setAlias("chrome")
-        .setDaemon(true);
+var runnerBuilderChild = dockerComm("runner");
+runnerBuilderChild
+    .setName("selenium-named-chrome")
+    .setImage("selenium-node-chrome:2.45.0")
+    .setAlias("chrome")
+    .setDaemon(true);
     
-    var runnerBuilder = dockerComm("runner");
+var runnerBuilder = dockerComm("runner");
     
-    runnerBuilder
-        .setName("hub")
-        .setImage("selenium-hub:2.45.0")
-        .setDaemon(true)
-        .addChild(runnerBuilderChild);
+runnerBuilder
+    .setName("hub")
+    .setImage("selenium-hub:2.45.0")
+    .setDaemon(true)
+    .addChild(runnerBuilderChild);
         
-    var runnerBuilderApp = dockerComm("runner");
+var runnerBuilderApp = dockerComm("runner");
     
-    runnerBuilderApp
-        .setName("hub")
-        .setImage("custom-application:1.0.0")
-        .setDaemon(true)
-        .addChild(runnerBuilder);
+runnerBuilderApp
+    .setName("hub")
+    .setImage("custom-application:1.0.0")
+    .setDaemon(true)
+    .addChild(runnerBuilder);
     
-    var command = runnerBuilderApp.make();
-    console.log(command)
-    
+var command = runnerBuilderApp.make();
+console.log(command)
+```
+
 Will output te next array :
 
     [
-        'docker pull selenium-node-chrome:2.45.0'
-        'docker pull selenium-hub:2.45.0'
-        'docker pull custom-application:1.0.0'
-        'docker run -d --name=selenium-named-chrome selenium-node-chrome:2.45.0'
-        'docker run -d --name=hub --link selenium-named-chrome:chrome selenium-hub:2.45.0'
+        'docker pull selenium-node-chrome:2.45.0',
+        'docker pull selenium-hub:2.45.0',
+        'docker pull custom-application:1.0.0',
+        'docker run -d --name=selenium-named-chrome selenium-node-chrome:2.45.0',
+        'docker run -d --name=hub --link selenium-named-chrome:chrome selenium-hub:2.45.0',
         'docker run -d --name=hub --link hub:selenium-hub custom-application:1.0.0'
     ]
     
@@ -61,7 +65,11 @@ You can set build folder and tag, environment variables, volumes, etc...
 
 ### puller
 
-Exposed by ```require("docker-command-builder")("puller")```
+Exposed by:
+
+```javascript
+require("docker-command-builder")("puller")
+```
 
 #### puller#setImage(image)
 
@@ -71,13 +79,16 @@ Sets the name of the image for the pull command
 
 By default is setted to null (the official docker registry), you can change it on this variable
 
-    var pullerBuilder = dockerComm("puller");
-    pullerBuilder.setImage("image1");
-    pullerBuilder.setRegistry("registry.custom.server.com");
-    pullerBuilder.setVersion("1.1.1");
-    var command = pullerBuilder.make();
-    console.log(command);
-    //--> docker pull registry.custom.server.com/image1:1.1.1
+```javascript
+var pullerBuilder = dockerComm("puller");
+pullerBuilder.setImage("image1");
+pullerBuilder.setRegistry("registry.custom.server.com");
+pullerBuilder.setVersion("1.1.1");
+var command = pullerBuilder.make();
+
+console.log(command);
+//--> docker pull registry.custom.server.com/image1:1.1.1
+```
 
 #### puller#make
 
