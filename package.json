@@ -1,6 +1,6 @@
 {
   "name": "docker-command-builder",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Docker command generator that take cares of container dependencies",
   "main": "src/index.js",
   "scripts": {
