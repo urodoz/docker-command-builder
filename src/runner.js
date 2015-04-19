@@ -98,8 +98,10 @@ module.exports = function(dockerVersion) {
         switch (mode) {
             case "rw":
                 rMode = ":rw";
+                break;
             case "ro":
                 rMode = ":ro";
+                break;
         }
 
         this.volumes.push(hostDir+":"+containerDir+rMode);

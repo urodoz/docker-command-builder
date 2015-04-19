@@ -162,21 +162,6 @@ Adds a new volume to the container. Mode by default is empty
 
 Generates the command array
 
-## Changelog
-
-#### **0.0.3**
-
-* Added support for clean up flag
-
-#### **0.0.2**
-
-* Travis integrated
-* Updated documentation
-
-#### **0.0.1**
-
-* First working version with basic support for build, pull and run
-
 ## TODO
 
 * Add runtime constraints to runner (memory and cpu)
