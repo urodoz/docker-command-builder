@@ -18,4 +18,4 @@ module.exports =  function(type, dockerVersion) {
             throw Error("type '"+type+"' not supportd in docker-command-builder");
     }
 
-}
+};

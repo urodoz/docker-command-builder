@@ -4,6 +4,7 @@
   "description": "Docker command generator that take cares of container dependencies",
   "main": "src/index.js",
   "scripts": {
+    "jshint": "jshint ./src",
     "test": "mocha --recursive test"
   },
   "repository": {
@@ -26,8 +27,12 @@
   "homepage": "https://github.com/urodoz/docker-command-builder",
   "devDependencies": {
     "mocha": "^2.2.4",
+    "pre-commit": "^1.0.6",
     "string": "^3.1.1"
   },
+  "pre-commit": [
+    "jshint"
+  ],
   "dependencies": {
     "lodash": "^3.7.0",
     "mustache": "^2.0.0",

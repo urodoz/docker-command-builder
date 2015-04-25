@@ -67,7 +67,7 @@ module.exports = function(dockerVersion) {
     this.addChild = function(child) {
         this.children.push(child);
         return this;
-    },
+    };
 
     this._addLink = function(linkDescription) {
         this._links.push(" --link "+linkDescription);
@@ -121,15 +121,15 @@ module.exports = function(dockerVersion) {
     };
 
     this.initTemplate = function() {
-        this.template = "docker run {{#daemon}}{{daemon}}{{/daemon}}"
-            + "{{#cleanUp}}{{cleanUp}}{{/cleanUp}}"
-            + " --name={{&name}}"
-            + "{{#privileged}} {{&privileged}}{{/privileged}}"
-            + "{{#ports}}{{&ports}}{{/ports}}"
-            + "{{#links}}{{&links}}{{/links}}"
-            + '{{#environmentVariables}} -e "{{{.}}}"{{/environmentVariables}}'
-            + '{{#volumes}} -v {{{.}}}{{/volumes}}'
-            + " {{&image}}"
+        this.template = "docker run {{#daemon}}{{daemon}}{{/daemon}}"+
+            "{{#cleanUp}}{{cleanUp}}{{/cleanUp}}"+
+            " --name={{&name}}"+
+            "{{#privileged}} {{&privileged}}{{/privileged}}"+
+            "{{#ports}}{{&ports}}{{/ports}}"+
+            "{{#links}}{{&links}}{{/links}}"+
+            '{{#environmentVariables}} -e "{{{.}}}"{{/environmentVariables}}'+
+            '{{#volumes}} -v {{{.}}}{{/volumes}}'+
+            " {{&image}}"
             ;
     };
 
