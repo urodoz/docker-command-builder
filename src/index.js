@@ -2,9 +2,10 @@ var puller = require("./puller"),
     builder = require("./builder"),
     runner = require("./runner");
 
-module.exports =  function(type) {
+module.exports =  function(type, dockerVersion) {
 
-    this.dockerVersion = 1.5;
+    this.dockerVersion = 1.6;
+    if(typeof(dockerVersion)!="undefined") this.dockerVersion = dockerVersion;
 
     switch (type) {
         case "puller":

@@ -16,6 +16,7 @@ module.exports = function(dockerVersion) {
     this.builder = null;
 
     this.daemon = true;
+    this.privileged = false;
     this.cleanUp = false;
     this.alias = null;
     this.ports = [];
@@ -35,6 +36,17 @@ module.exports = function(dockerVersion) {
     this.setCleanUp = function(flag) {
         this.cleanUp = flag;
         if(flag===true) this.daemon = false;
+        return this;
+    };
+
+    /**
+     * Sets the boolean value for privileged
+     *
+     * @param flag {boolean}
+     * @returns {runner}
+     */
+    this.setPrivileged = function(flag) {
+        this.privileged = flag;
         return this;
     };
 
@@ -112,6 +124,7 @@ module.exports = function(dockerVersion) {
         this.template = "docker run {{#daemon}}{{daemon}}{{/daemon}}"
             + "{{#cleanUp}}{{cleanUp}}{{/cleanUp}}"
             + " --name={{&name}}"
+            + "{{#privileged}} {{&privileged}}{{/privileged}}"
             + "{{#ports}}{{&ports}}{{/ports}}"
             + "{{#links}}{{&links}}{{/links}}"
             + '{{#environmentVariables}} -e "{{{.}}}"{{/environmentVariables}}'
@@ -159,6 +172,7 @@ module.exports = function(dockerVersion) {
         var templateObject = {
             daemon: (this.daemon) ? '-d' : '',
             cleanUp: (this.cleanUp) ? '--rm' : '',
+            privileged: (this.privileged) ? '--privileged' : '',
             image: this.image,
             name: this.name,
             links: (_.isEmpty(this._links)) ? false : this._links.join(" "),

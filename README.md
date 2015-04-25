@@ -61,6 +61,16 @@ Will output te next array :
     
 You can set build folder and tag, environment variables, volumes, etc...
 
+## Docker Version
+
+You can initiate the any docker-commander object with different version, by default is the latest version.
+
+```javascript
+dockerComm = require("docker-command-builder");
+
+var runnerBuilderChild_13 = dockerComm("runner", 1.3); //<-- set the version on creation
+```
+
 ## API
 
 ### puller
@@ -142,9 +152,13 @@ Sets the run command as daemon or not (by default is ```true```). If enabled, di
 
 Sets the container flag for clean up (--rm). If enabled, disables the daemon flag.
 
+#### runner#setPrivileged(boolean flag)
+
+Sets the container flag for privileged container (--privileged).
+
 #### runner#setImage(image)
 
-Sets the image of the command. Disabled the build information
+Sets the image of the command. Disabled the build information.
 
 #### runner#getImage
 
@@ -165,7 +179,6 @@ Generates the command array
 ## TODO
 
 * Add runtime constraints to runner (memory and cpu)
-* Add privileged flag
 * Add user option to runner
 * Add workdir option to runner
 * Add command option to runner
